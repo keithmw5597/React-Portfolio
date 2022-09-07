@@ -3,7 +3,7 @@ import { Navbar } from 'react-bootstrap';
 import Nav from './components/Nav/index';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
-import ContactForm from './components/Contact';
+import Contact from './components/Contact/index';
 
 function App() {
 
@@ -18,9 +18,12 @@ function App() {
           <Nav/>
         </Navbar>
         <main>
-          <Route>
-            <Contact/>
-          </Route>
+          <Routes>
+            <Route path="./src/components/Contact/index" element={<Contact/>}/>
+              
+            
+          </Routes>
+        
         </main>
       </Router>
     </div>

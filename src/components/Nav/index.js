@@ -1,53 +1,23 @@
 import React from "react";
-import { capitalizeFirstLetter } from "../../utils/helpers";
-
-function Nav(props) {
-    const { 
-        categories = [],
-        setCurrentCategory,
-        currentCategory,
-        contactSelected,
-        setContactSelected } = props;
+import { Navbar } from 'react-bootstrap';
 
 
-        return (
-            <header className="flex-row px-1">
-                <h2>
-                <a data-testid="link" href="/">
-                  
-                </a>
-               </h2>
-                <nav>
-                <ul className="flex-row">
-                    <li className="mx-2">
-                        <a data-testid="about" href="#about" onClick={() => setContactSelected(false)}>
-                          About me
-                        </a>
-                    </li>
-                    <li className={`mx-2 ${contactSelected && 'navActive'}`}>
-                        <span onClick={() => setContactSelected(true)}>Contact</span>
-                    </li>
-                    {categories.map((category) => (
-                        <li
-                        className={`mx-1 ${
-                            currentCategory.name === category.name && !contactSelected && 'navActive'
-                            }`}
-                        key={category.name}
-                        >
-                          <span
-                            onClick={() => {
-                              setCurrentCategory(category);
-                              setContactSelected(false);
-                            }}
-                        >
-                            {capitalizeFirstLetter(category.name)}
-                        </span>
-                    </li>
-                ))}
-                    </ul>
-                  </nav>
-            </header>
-        );
-    }
-            
-    export default Nav;
+function Nav({currentPage, handlePageChange}) {
+
+    return (
+      <Navbar bg="secondary" variant="dark" expand = "lg">
+          <Navbar.Brand href="#about_Me" className="mx-3"><h1>Keith Williams</h1></Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" className="mx-3"/>
+            <Navbar.Collapse id="basic-navbar-nav" className="mx-3">
+              <Nav className="me-auto">
+                <Nav.Link href="#about_Me" onClick ={() => handlePageChange('About')} className = {currentPage === 'About' ? 'navActive' : 'nav-link'}> About Me</Nav.Link>
+                <Nav.Link href="#portfolio" onClick ={() => handlePageChange('Portfolio')} className = {currentPage === 'Portfolio' ? 'navActive' : 'nav-link'}>Portfolio</Nav.Link>
+                <Nav.Link href="#resume" onClick ={() => handlePageChange('Resume')} className = {currentPage === 'Resume' ? 'navActive' : 'nav-link'}>Resume</Nav.Link>
+                <Nav.Link href="#contact" onClick ={() => handlePageChange('Contact')} className = {currentPage === 'Contact' ? 'navActive' : 'nav-link'}>Contact</Nav.Link>
+              </Nav>
+            </Navbar.Collapse>
+      </Navbar>
+    );
+  }
+  
+  export default Nav;
